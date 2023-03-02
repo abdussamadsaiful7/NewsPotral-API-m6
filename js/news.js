@@ -37,12 +37,12 @@ const showAllNews = (data, category_name) => {
         singleNewsContainer.innerHTML = '';
 
     data.forEach(singleNews =>{
-        const {image_url, details, title, author, total_view} = singleNews;
-        //console.log(total_view);
+        const {_id, image_url, details, title, author, total_view} = singleNews;
+        console.log(singleNews._id);
        const card = document.createElement('div');
        card.classList.add('card');
        card.innerHTML= `
-       <div class="row g-0">
+        <div class="row g-0">
             <div class="col-md-4">
                 <img src="${image_url}" class="img-fluid rounded-start" alt="...">
             </div>
@@ -75,7 +75,7 @@ const showAllNews = (data, category_name) => {
                     </div>
 
                     <div>   
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <i class="fa-solid fa-circle-arrow-right onclick="fetchShowNewsDetails('${_id}')""></i>
                     </div>
                 </div>
             </div>
@@ -84,5 +84,17 @@ const showAllNews = (data, category_name) => {
        singleNewsContainer.appendChild(card);
        
     })
+};
+
+
+const fetchShowNewsDetails = news_id =>{
+    const URL =` https://openapi.programming-hero.com/api/news/${news_id}`;
+   fetch(URL)
+   .then(res => res.json())
+   .then(data => ShowNewsDetails(data.data))
 }
 
+const ShowNewsDetails = (newsDetail) =>{
+
+        
+}
