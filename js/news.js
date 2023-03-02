@@ -30,18 +30,17 @@ const fetchCategoryNews = (category_id, category_name) => {
 }
 
 const showAllNews = (data, category_name) => {
-    console.log(data, category_name);
+    //console.log(data, category_name);
     document.getElementById('news-count').innerText = data.length;
     document.getElementById('category-name').innerText =category_name;
     const singleNewsContainer = document.getElementById('all-news'); 
         singleNewsContainer.innerHTML = '';
 
     data.forEach(singleNews =>{
-        const {_id, image_url, details, title, author, total_view} = singleNews;
-        console.log(singleNews._id);
-       const card = document.createElement('div');
-       card.classList.add('card');
-       card.innerHTML= `
+    const {_id, image_url, details, title, author, total_view} = singleNews;
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML= `
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="${image_url}" class="img-fluid rounded-start" alt="...">
@@ -66,7 +65,7 @@ const showAllNews = (data, category_name) => {
                         </div>
                         
                         <div class="pt-3">
-                        <p>${total_view}</p>
+                        <p>${total_view ? total_view : 'No view'}</p>
                         </div>
                     </div>
                 
@@ -75,7 +74,8 @@ const showAllNews = (data, category_name) => {
                     </div>
 
                     <div>   
-                    <i class="fa-solid fa-circle-arrow-right onclick="fetchShowNewsDetails('${_id}')""></i>
+                    <i class="fa-solid fa-circle-arrow-right text-primary fs-5 onclick="fetchShowNewsDetails('${_id}')" 
+                    data-bs-toggle="modal" data-bs-target="#exampleModal" ></i>
                     </div>
                 </div>
             </div>
@@ -87,14 +87,3 @@ const showAllNews = (data, category_name) => {
 };
 
 
-const fetchShowNewsDetails = news_id =>{
-    const URL =` https://openapi.programming-hero.com/api/news/${news_id}`;
-   fetch(URL)
-   .then(res => res.json())
-   .then(data => ShowNewsDetails(data.data))
-}
-
-const ShowNewsDetails = (newsDetail) =>{
-
-        
-}
