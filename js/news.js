@@ -35,35 +35,48 @@ const showAllNews = (data, category_name) => {
     document.getElementById('category-name').innerText =category_name;
     const singleNewsContainer = document.getElementById('all-news'); 
         singleNewsContainer.innerHTML = '';
-    data.forEach(singleNews =>{
 
-        console.log(singleNews.details);
-        //console.log(singleNews);
+    data.forEach(singleNews =>{
+        const {image_url, details, title, author, total_view} = singleNews;
+        //console.log(total_view);
        const card = document.createElement('div');
        card.classList.add('card');
        card.innerHTML= `
        <div class="row g-0">
             <div class="col-md-4">
-                <img src="${singleNews.image_url}" class="img-fluid rounded-start" alt="...">
+                <img src="${image_url}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col-md-8 d-flex flex-column">
                 <div class="card-body">
-                  <h5 class="card-title">Title:  ${singleNews.title}</h5>
-                  <p class="card-text">${singleNews.details.slice(0, 300)} .....</p>
+                  <h5 class="card-title">Title:  ${title}</h5>
+                  <p class="card-text">${details.slice(0, 300)} .....</p>
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
-                <div class="card-footer border-0 bg-body">
+                <div class="card-footer border-0 bg-body d-flex justify-content-between">
                     <div class="d-flex g-2">
-                        <img src="${singleNews.author.img}" class="img-fluid rounded-circle" alt="..." height="40"width="40">
+                        <img src="${author.img}" class="img-fluid rounded-circle" alt="..." height="40"width="40">
                         <div class="ms-4">
-                            <p class ="m-0 p-0">${singleNews.author.name}</p>
-                            <p class ="m-0 p-0">${singleNews.author.published_date}</p>
+                            <p class ="m-0 p-0">${author.name}</p>
+                            <p class ="m-0 p-0">${author.published_date}</p>
                         </div>     
                     </div>
                     <div class="d-flex align-items-center">
+                        <div class="me-2">
+                            <i class="fa-regular fa-eye"></i>
+                        </div>
                         
+                        <div class="pt-3">
+                        <p>${total_view}</p>
+                        </div>
                     </div>
-                    <div></div>
+                
+                    <div>
+                        <i class="fa-regular fa-star"></i>
+                    </div>
+
+                    <div>   
+                    <i class="fa-solid fa-arrow-right"></i>
+                    </div>
                 </div>
             </div>
         </div>
